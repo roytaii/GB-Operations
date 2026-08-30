@@ -57,3 +57,9 @@ For example, regarding the inventory management system (within the inventory mod
 Idealy, the prototype (and the end result) will be easy to use, without much clutter on the screen. The home page will contain all the modules: large squares with rounded edges. Three squares per row. The modules will include Accounts Receivable, Accounts Payable, Customers/Vendors, Inventory, All Invoices, Item Master, Sales, Shipments, Parking (incoming and outgoing trucks), Purchase Orders (POs). 
 
 ---
+
+## 5. Intended UI of the Inventory Management Module
+
+### Search Function
+
+### 
