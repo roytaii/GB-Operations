@@ -175,4 +175,5 @@ The answers here change what we build, so get them before writing any spec.
 **About the trucks**
 
 * How many trucks and drivers go out each day, and how many stops each?
+* How are the routes determined? By hand or via an algorithm? 
 * How many trucks arrive in a typical day?
