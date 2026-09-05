@@ -5,28 +5,26 @@ changes at each step.
 
 Companion to [module_plan.md](module_plan.md).
 
-**Roles are a guess until the warehouse visit.** At a company this size one person
-may do four of these jobs. Confirm who's who before building any permissions.
-
 ---
 
 ## The short version
 
 ```
-PO STATUS:   Draft  ──►  Sent  ──►  Expected  ──►  Received  ──►  Matched  ──►  Paid
-MODULE:     Purchases  Purchases    Parking      Receiving        A/P         A/P
-WHO:          Buyer      Buyer       Gate         Receiver        Clerk       Owner
+PO STATUS     MODULE                       WHO
+Draft      →  Purchase Orders              Buyer
+Sent       →  Purchase Orders              Buyer
+Expected   →  Parking / Dock Scheduling    Gate
+Received   →  Receiving (incoming)         Receiver
+Matched    →  Accounts Payable             Clerk
+Paid       →  Accounts Payable             Owner
 ```
-
-One PO record, created once, read by five modules, with its status changing as it
-moves. Nobody re-types it — every later step either confirms it or corrects it.
 
 ---
 
 ## Step 1 — Decide what to buy
 
 **Who:** Buyer
-**Opens:** Sales (order history)
+**Opens:** Sales Orders (order history)
 **Does:** Looks at what's been selling to decide what's running low.
 **Creates:** Nothing yet — just a decision.
 **Feeds:** Step 2
@@ -37,8 +35,8 @@ moves. Nobody re-types it — every later step either confirms it or corrects it
 ## Step 2 — Write the purchase order
 
 **Who:** Buyer
-**Opens:** Purchases (new PO), pulling from **Item Master** (what to order) and
-**Vendors** (who from, their price, their terms)
+**Opens:** Purchase Orders (new PO), pulling from **Item Master** (what to order)
+and **Customers & Vendors** (who from, their price, their terms)
 **Does:** Enters items, quantities, agreed price, expected delivery date.
 **Creates:** PO #1042. Status = **Sent**.
 **Feeds — and this is the important part, it feeds three places at once:**
@@ -50,23 +48,23 @@ moves. Nobody re-types it — every later step either confirms it or corrects it
 ## Step 3 — Vendor confirms and ships
 
 **Who:** Buyer or office
-**Opens:** Purchases
+**Opens:** Purchase Orders
 **Does:** Marks the PO confirmed, updates the arrival date if the vendor changed it.
 **Changes:** PO status = **Expected**.
-**Feeds:** Parking — now there's a real appointment on a real day.
+**Feeds:** Parking / Dock Scheduling — now there's a real appointment on a real day.
 
 ## Step 4 — Truck arrives at the gate
 
 **Who:** Gate / yard person
-**Opens:** Parking
+**Opens:** Parking / Dock Scheduling
 **Does:** Checks the truck in, assigns it a door.
 **Changes:** Truck marked arrived.
-**Feeds:** Receiving — the dock now knows PO #1042 is sitting at door 3.
+**Feeds:** Receiving (incoming) — the dock now knows PO #1042 is sitting at door 3.
 
 ## Step 5 — Receiving checks the truck
 
 **Who:** Receiver
-**Opens:** Receiving, which pulls up PO #1042 automatically
+**Opens:** Receiving (incoming), which pulls up PO #1042 automatically
 **Does:** The three-way look — what we ordered (PO), what the driver's paperwork
 says (BOL), and what's actually in the trailer. Then QC: count, weight,
 temperature, condition, dates.
@@ -81,7 +79,7 @@ temperature, condition, dates.
 ## Step 6 — Barcode and location
 
 **Who:** Receiver
-**Opens:** Receiving
+**Opens:** Receiving (incoming)
 **Does:** Labels every case or pallet, assigns a warehouse location.
 **Creates:** The individual case records — the first moment a physical box becomes
 something the computer can follow.
@@ -90,7 +88,7 @@ something the computer can follow.
 ## Step 7 — Receive it into inventory
 
 **Who:** Receiver
-**Opens:** Receiving — presses **Receive**
+**Opens:** Receiving (incoming) — presses **Receive**
 **Does:** Commits the receipt.
 **Changes:**
 
@@ -112,7 +110,7 @@ something the computer can follow.
 ## Step 9 — The vendor's invoice arrives
 
 **Who:** A/P clerk
-**Opens:** A/P, which pulls up both the PO and the receipt
+**Opens:** Accounts Payable, which pulls up both the PO and the receipt
 **Does:** The **three-way match**:
 
 | | |
@@ -131,7 +129,7 @@ All three should agree. When they don't, the receipt wins.
 ## Step 10 — Something was wrong *(only if needed)*
 
 **Who:** Receiver flags it; Buyer or Manager owns it
-**Opens:** Purchases / A/P
+**Opens:** Purchase Orders / Accounts Payable
 **Does:**
 
 * Short shipment → reduce the payable, don't pay for what didn't come
@@ -144,7 +142,7 @@ All three should agree. When they don't, the receipt wins.
 ## Step 11 — Pay the vendor
 
 **Who:** A/P clerk enters it, Manager or owner approves
-**Opens:** A/P
+**Opens:** Accounts Payable
 **Does:** Pays per terms (Net 30 from the receipt date, not the order date).
 **Changes:** PO status = **Paid**. The payable clears.
 **Feeds:** Reports

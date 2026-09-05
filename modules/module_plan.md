@@ -8,14 +8,14 @@
 ## How it all connects
 
 ```
-              ITEM MASTER  +  CUSTOMERS / VENDORS
+              ITEM MASTER  +  CUSTOMERS & VENDORS
               (everything below points back to these)
                               │
         ┌─────────────────────┴─────────────────────┐
         │                                           │
-   SALES ORDER                                PURCHASE ORDER
+  SALES ORDERS                               PURCHASE ORDERS
         ↓                                           ↓
-     SHIPPING  ──────►  INVENTORY  ◄──────      RECEIVING
+    SHIPMENTS  ──────►  INVENTORY  ◄──────      RECEIVING
         ↓            (the warehouse itself)          ↓
        A/R                                          A/P
    (money in)                                  (money out)
@@ -45,13 +45,32 @@ Everything meets in the middle at Inventory.
 * GB needs to be able to add a vendor
 * GB needs to be able to search either one
 
-### 3. Sales
+### 3. Purchase Orders
+
+* GB needs to be able to enter purchase orders (will go to A/P)
+* GB needs to be able to view and search the purchase history
+
+### 4. Receiving (incoming)
+
+* GB needs to be able to check an arriving truck against the PO
+* GB needs to be able to record the QC check: count, weight, temperature, condition, dates
+* GB needs to be able to assign or confirm a barcode on every case
+* GB needs to be able to assign a warehouse location
+* GB needs to be able to receive the PO into inventory (this is when stock goes up)
+
+### 5. Inventory
+
+* GB needs to be able to view and search any item in the warehouse, with its location and quantity
+* GB needs to be able to see the full history of a case: which vendor it came from, where it was put, who moved it, which truck took it, which customer got it
+* GB needs to be able to adjust a count, with a reason attached
+
+### 6. Sales Orders
 
 * GB needs to be able to enter customer orders (will go to A/R)
 * GB needs to be able to view and search the order history
 * GB needs to be warned when a customer is over their credit limit
 
-### 4. Shipping
+### 7. Shipments (outgoing)
 
 * GB needs to be able to print a pick ticket and release it to the warehouse
 * GB needs to be able to record what was *actually* picked (not just what was ordered)
@@ -60,46 +79,25 @@ Everything meets in the middle at Inventory.
 * GB needs to be able to capture the customer's signature as proof of delivery
 * GB needs to be able to close out each driver at the end of the day
 
-### 5. Purchases
+### 8. Parking / Dock Scheduling
 
-* GB needs to be able to enter purchase orders (will go to A/P)
-* GB needs to be able to view and search the purchase history
+* GB needs to be able to see which trucks are coming in and going out today
+* GB needs to be able to assign a truck to a door or a spot
 
-### 6. Receiving
-
-* GB needs to be able to check an arriving truck against the PO
-* GB needs to be able to record the QC check: count, weight, temperature, condition, dates
-* GB needs to be able to assign or confirm a barcode on every case
-* GB needs to be able to assign a warehouse location
-* GB needs to be able to receive the PO into inventory (this is when stock goes up)
-
-**Why this one matters most:** if a case doesn't get a barcode here, nothing downstream can track it. Every "where is it / who touched it" feature is a promise made at this step.
-
-### 7. Inventory / Warehouse
-
-* GB needs to be able to view and search any item in the warehouse, with its location and quantity
-* GB needs to be able to see the full history of a case: which vendor it came from, where it was put, who moved it, which truck took it, which customer got it
-* GB needs to be able to adjust a count, with a reason attached
-
-### 8. Invoices
+### 9. Invoices
 
 * GB needs to be able to view and search every invoice
 * GB needs to be able to see whether it was delivered and signed
 
-### 9. Accounts Receivable (money in)
+### 10. Accounts Receivable (money in)
 
 * GB needs to be able to see who owes them money and how late it is
 * GB needs to be able to record a payment
 
-### 10. Accounts Payable (money out)
+### 11. Accounts Payable (money out)
 
 * GB needs to be able to see who they owe and when it's due
 * GB needs to be able to pay only for what actually arrived in good condition
-
-### 11. Parking
-
-* GB needs to be able to see which trucks are coming in and going out today
-* GB needs to be able to assign a truck to a door or a spot
 
 ### 12. Reports
 
@@ -133,9 +131,9 @@ Every one of these needs a person's name attached and a note. This is where the 
 
 Not all at once. Roughly:
 
-1. **First — the physical loop:** Item Master, Customers & Vendors, Receiving, Inventory, Shipping (plus thin order and PO entry, just enough to generate a pick ticket). This is the inventory management system, and it's what stops the re-typing.
-2. **Second — Parking.**
-3. **Third — the paperwork:** full Sales, full Purchases, Invoices.
+1. **First — the physical loop:** Item Master, Customers & Vendors, Receiving, Inventory, Shipments (plus thin Sales Order and Purchase Order entry, just enough to generate a pick ticket). This is the inventory management system, and it's what stops the re-typing.
+2. **Second — Parking / Dock Scheduling.**
+3. **Third — the paperwork:** full Sales Orders, full Purchase Orders, Invoices.
 4. **Fourth — the money:** A/R, A/P, Reports.
 
 ---

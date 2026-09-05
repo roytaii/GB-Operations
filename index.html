@@ -5,26 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Warehouse System</title>
 <style>
+/* Single light scheme on purpose — this looks the same on every machine,
+   whatever the viewer's system theme is set to. */
 :root{
-  --bg:#f7f7f5; --tile:#ffffff; --text:#1a1a19; --muted:#6b6b66;
-  --line:#e4e3df; --line-2:#efeeea; --dot:#c9c7c0; --accent:#b45309;
-  --shadow:0 1px 2px rgba(26,26,25,.04), 0 8px 24px rgba(26,26,25,.05);
-  --shadow-hi:0 3px 6px rgba(26,26,25,.07), 0 16px 38px rgba(26,26,25,.11);
-  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,sans-serif;
-  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
-}
-@media (prefers-color-scheme:dark){
-  :root{
-    --bg:#131417; --tile:#1b1d21; --text:#e8e9ec; --muted:#9096a0;
-    --line:#282b31; --line-2:#22252a; --dot:#4a4f57; --accent:#e8a33d;
-    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.22);
-    --shadow-hi:0 3px 6px rgba(0,0,0,.4), 0 16px 38px rgba(0,0,0,.36);
-  }
+  --bg:#f4efe3; --tile:#fffcf5; --text:#2b2318; --muted:#5c5240;
+  --line:#d5c9ae; --line-2:#e5dcc7; --dot:#a08f70; --accent:#8a3f24;
+  --shadow:2px 2px 0 rgba(58,47,31,.09);
+  --shadow-hi:3px 3px 0 rgba(58,47,31,.18);
+  --serif:Georgia,"Times New Roman",Times,serif;
+  --mono:"Courier New",Courier,ui-monospace,monospace;
 }
 *{box-sizing:border-box}
 body{
   margin:0;background:var(--bg);color:var(--text);
-  font:15px/1.5 var(--sans);-webkit-font-smoothing:antialiased;
+  font:15px/1.55 var(--serif);-webkit-font-smoothing:antialiased;
   padding:60px 40px 90px;
 }
 .view{display:none}
@@ -32,28 +26,28 @@ body{
 
 /* ── home ───────────────────────────────────────────────────────────────── */
 .wrap{max-width:1040px;margin:0 auto}
-h1{font-size:30px;line-height:1.15;letter-spacing:-.7px;margin:0;font-weight:650}
+h1{font-size:30px;line-height:1.2;letter-spacing:0;margin:0;font-weight:700}
 .lede{margin:9px 0 38px;color:var(--muted);font-size:15px}
 
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 
 .tile{
   aspect-ratio:6/5;
-  background:var(--tile);border:1px solid var(--line);border-radius:22px;
+  background:var(--tile);border:1px solid var(--line);border-radius:3px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:16px;padding:24px;text-align:center;text-decoration:none;color:inherit;
   box-shadow:var(--shadow);
-  transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+  transition:box-shadow .12s ease, border-color .12s ease;
 }
 .tile:hover,.tile:focus-visible{
-  transform:translateY(-3px);box-shadow:var(--shadow-hi);
+  box-shadow:var(--shadow-hi);
   border-color:var(--accent);outline:none;
 }
 .tile svg{width:32px;height:32px;stroke:var(--muted);stroke-width:1.5;
           fill:none;stroke-linecap:round;stroke-linejoin:round;
           transition:stroke .16s ease}
 .tile:hover svg,.tile:focus-visible svg{stroke:var(--accent)}
-.tile .name{font-size:17px;font-weight:650;letter-spacing:-.25px;line-height:1.3}
+.tile .name{font-size:17px;font-weight:700;letter-spacing:0;line-height:1.3}
 
 @media (max-width:1040px){ .grid{grid-template-columns:repeat(2,1fr)} }
 @media (max-width:640px){
@@ -70,22 +64,21 @@ h1{font-size:30px;line-height:1.15;letter-spacing:-.7px;margin:0;font-weight:650
   color:var(--muted);font-size:13.5px;margin-bottom:30px;
 }
 .back:hover{color:var(--accent)}
-.mod h2{font-size:29px;line-height:1.15;letter-spacing:-.7px;margin:0;font-weight:650}
+.mod h2{font-size:29px;line-height:1.2;letter-spacing:0;margin:0;font-weight:700}
 .what{margin:12px 0 0;font-size:16px;line-height:1.55}
 
 .mod ul{margin:26px 0 0;padding:0;list-style:none}
 .mod li{
-  position:relative;padding-left:18px;margin-bottom:11px;
-  font-size:14.5px;line-height:1.6;color:var(--muted);
+  position:relative;padding-left:18px;margin-bottom:12px;
+  font-size:15.5px;line-height:1.6;color:var(--text);
 }
 .mod li::before{
   content:"";position:absolute;left:1px;top:10px;
   width:5px;height:5px;border-radius:50%;background:var(--dot);
 }
-.mod li strong,.what strong{color:var(--text);font-weight:650}
 
 .sub{
-  font:650 10.5px/1 var(--sans);text-transform:uppercase;letter-spacing:.1em;
+  font:700 11px/1 var(--mono);text-transform:uppercase;letter-spacing:.12em;
   color:var(--muted);margin:30px 0 0;
 }
 .sub + ul{margin-top:14px}
@@ -94,8 +87,7 @@ h1{font-size:30px;line-height:1.15;letter-spacing:-.7px;margin:0;font-weight:650
   margin:32px 0 0;padding-top:20px;border-top:1px solid var(--line);
   font-size:14px;line-height:1.6;color:var(--muted);
 }
-.nuance b{font-weight:650;color:var(--text)}
-.blank{margin:26px 0 0;font-size:14.5px;color:var(--muted);opacity:.65;font-style:italic}
+.blank{margin:26px 0 0;font-size:15px;color:var(--muted);opacity:.85;font-style:italic}
 </style>
 </head>
 <body>
@@ -123,6 +115,11 @@ h1{font-size:30px;line-height:1.15;letter-spacing:-.7px;margin:0;font-weight:650
         <span class="name">Purchase Orders</span>
       </a>
 
+      <a class="tile" href="#receiving">
+        <svg viewBox="0 0 24 24"><rect x="2" y="7.5" width="12" height="9" rx="1"/><path d="M22 4v16"/><path d="M15 12h4.5"/><path d="m17 9.5 2.5 2.5-2.5 2.5"/></svg>
+        <span class="name">Receiving (incoming)</span>
+      </a>
+
       <a class="tile" href="#inventory">
         <svg viewBox="0 0 24 24"><rect x="8" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>
         <span class="name">Inventory</span>
@@ -135,7 +132,7 @@ h1{font-size:30px;line-height:1.15;letter-spacing:-.7px;margin:0;font-weight:650
 
       <a class="tile" href="#shipments">
         <svg viewBox="0 0 24 24"><rect x="2.5" y="6.5" width="11" height="9" rx="1"/><path d="M13.5 10h3.8a1 1 0 0 1 .78.37l2.2 2.75a1 1 0 0 1 .22.63v1.75h-7Z"/><circle cx="7" cy="17.8" r="1.7"/><circle cx="17" cy="17.8" r="1.7"/></svg>
-        <span class="name">Shipments</span>
+        <span class="name">Shipments (outgoing)</span>
       </a>
 
       <a class="tile" href="#parking">
@@ -158,6 +155,11 @@ h1{font-size:30px;line-height:1.15;letter-spacing:-.7px;margin:0;font-weight:650
         <span class="name">Accounts Payable</span>
       </a>
 
+      <a class="tile" href="#reports">
+        <svg viewBox="0 0 24 24"><path d="M4 3v17h17"/><rect x="7.5" y="14" width="3" height="6" rx=".5"/><rect x="12" y="9" width="3" height="11" rx=".5"/><rect x="16.5" y="11.5" width="3" height="8.5" rx=".5"/></svg>
+        <span class="name">Reports</span>
+      </a>
+
     </nav>
   </div>
 </section>
@@ -165,7 +167,7 @@ h1{font-size:30px;line-height:1.15;letter-spacing:-.7px;margin:0;font-weight:650
 
 <!-- ══ MODULES ════════════════════════════════════════════════════════════
      For the prototype each module holds only its text from
-     MODULE_DESCRIPTIONS.md. Search and records come later.
+     modules/module_descriptions.md. Search and records come later.
      ═══════════════════════════════════════════════════════════════════════ -->
 
 <section id="item-master" class="view">
@@ -175,15 +177,15 @@ h1{font-size:30px;line-height:1.15;letter-spacing:-.7px;margin:0;font-weight:650
     <p class="what">One page per product you sell.</p>
     <ul>
       <li>What it is, what brand, what category</li>
-      <li><strong>How it's packed.</strong> A case of shrimp is 20 bags of 2 lbs.</li>
+      <li>How it's packed. A case of shrimp is 20 bags of 2 lbs.</li>
       <li>Size and weight of a case, and how many fit on a pallet</li>
       <li>Whether it goes in dry storage, the cooler, or the freezer</li>
       <li>How long it lasts</li>
       <li>What you pay for it, and whether it's sold by the case or by actual weight</li>
       <li>When to reorder — the point where you're getting low</li>
     </ul>
-    <p class="nuance"><b>Nuances:</b> Different cases of shrimp from different
-      suppliers will have separate pages/rows.</p>
+    <p class="nuance">Nuances: Different cases of shrimp from different suppliers
+      will have separate pages/rows.</p>
   </article>
 </section>
 
@@ -197,7 +199,7 @@ h1{font-size:30px;line-height:1.15;letter-spacing:-.7px;margin:0;font-weight:650
     <ul>
       <li>Who they are, and where to deliver — which is often not where to send the bill</li>
       <li>Who to call: the manager, and the person who handles payments</li>
-      <li><strong>How they pay you.</strong> 30 days, or cash at the door?</li>
+      <li>How they pay you. 30 days, or cash at the door?</li>
       <li>When you can deliver — some places won't take a delivery during lunch rush</li>
       <li>What the driver needs to know: use the back door, ring the buzzer, no big
         trucks on that street</li>
@@ -208,8 +210,8 @@ h1{font-size:30px;line-height:1.15;letter-spacing:-.7px;margin:0;font-weight:650
     <ul>
       <li>Who they are, where to send the payment</li>
       <li>Average duration it takes them to deliver after you order</li>
-      <li><strong>Their product numbers versus yours.</strong> They call it item 4471,
-        you call it item B357A.</li>
+      <li>Their product numbers versus yours. They call it item 4471, you call it
+        item B357A.</li>
       <li>Copies of their food safety paperwork, and when it expires</li>
     </ul>
   </article>
@@ -229,6 +231,27 @@ h1{font-size:30px;line-height:1.15;letter-spacing:-.7px;margin:0;font-weight:650
   </article>
 </section>
 
+<section id="receiving" class="view">
+  <article class="mod">
+    <a class="back" href="#home">← Modules</a>
+    <h2>Receiving (incoming)</h2>
+    <p class="what">What actually showed up on the truck, and what shape it was in.</p>
+    <ul>
+      <li>Which purchase order the truck is against, and which vendor sent it</li>
+      <li>The driver, the truck, and the seal number on the trailer</li>
+      <li>What time it arrived, and which door it pulled into</li>
+      <li>Who on GB crew checked it in</li>
+      <li>How many cases arrived vs how many you ordered</li>
+      <li>The actual weight</li>
+      <li>Temperature when it landed: the trailer, and a probe stuck in the product itself</li>
+      <li>Batch numbers, pack dates, and expiration dates off the cases</li>
+      <li>Anything wrong (short, damaged, temperature, wrong item, expiring too soon) with a photo</li>
+      <li>The barcode that goes on each case, and which spot in the warehouse it's headed to</li>
+    </ul>
+    <p class="nuance">Should match the PO</p>
+  </article>
+</section>
+
 <section id="inventory" class="view">
   <article class="mod">
     <a class="back" href="#home">← Modules</a>
@@ -238,10 +261,8 @@ h1{font-size:30px;line-height:1.15;letter-spacing:-.7px;margin:0;font-weight:650
       <li>Every product, how many cases, in which spot</li>
       <li>Which batch it came from and when it expires</li>
       <li>Which zone it's in: dry, cooler, freezer</li>
-      <li>Whether it's actually available, or damaged, or on hold, or already
-        promised to someone</li>
-      <li><strong>A full history of every case:</strong> received, put away, picked,
-        moved, thrown out — with who did it and when</li>
+      <li>Whether it's actually available, or damaged, or on hold, or already promised to someone</li>
+      <li>A full history of every case: received, put away, picked, moved, thrown out — with who did it and when</li>
     </ul>
   </article>
 </section>
@@ -263,7 +284,7 @@ h1{font-size:30px;line-height:1.15;letter-spacing:-.7px;margin:0;font-weight:650
 <section id="shipments" class="view">
   <article class="mod">
     <a class="back" href="#home">← Modules</a>
-    <h2>Shipments</h2>
+    <h2>Shipments (outgoing)</h2>
     <p class="what">What physically went out the door.</p>
     <ul>
       <li>What was loaded on which truck, going to which stops, in what order</li>
@@ -293,7 +314,7 @@ h1{font-size:30px;line-height:1.15;letter-spacing:-.7px;margin:0;font-weight:650
   <article class="mod">
     <a class="back" href="#home">← Modules</a>
     <h2>Invoices</h2>
-    <p class="what">Customer and supplier invoices.</p>
+    <p class="what">Customer and supplier invoices</p>
   </article>
 </section>
 
@@ -310,6 +331,26 @@ h1{font-size:30px;line-height:1.15;letter-spacing:-.7px;margin:0;font-weight:650
     <a class="back" href="#home">← Modules</a>
     <h2>Accounts Payable</h2>
     <p class="blank">Not described yet.</p>
+  </article>
+</section>
+
+<section id="reports" class="view">
+  <article class="mod">
+    <a class="back" href="#home">← Modules</a>
+    <h2>Reports</h2>
+    <p class="what">Pulled from everything above. No new information, nothing to
+      type - read only.</p>
+    <ul>
+      <li>How old your stock is: 0–30 days, 31–60, 61–90, over 90</li>
+      <li>How fast inventory turns over, against a target of about 30 days</li>
+      <li>What's barely moving</li>
+      <li>Gross margin: by product, by customer, by salesperson</li>
+      <li>Who owes you money, and how late they are</li>
+      <li>Which vendors are reliable: who ships short, who shows up late, who sends it warm</li>
+      <li>How often an order can't be filled completely</li>
+      <li>What's being thrown away, and what it cost</li>
+      <li>Customers gained, customers still ordering, customers who quietly stopped</li>
+    </ul>
   </article>
 </section>
 
